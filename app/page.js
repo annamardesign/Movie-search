@@ -1,7 +1,7 @@
 import Image from 'next/image';
 export default function Home() {
   return (
-    <div className='wrapper'>
+    <div className='container'>
       <nav className='nav'>
         <Image
           width={247}
@@ -17,10 +17,15 @@ export default function Home() {
         <aside className='sidebar'>Side</aside>
         <main className='content'>
           <div className='share'>
-            <p>Share something to the community...</p>
-            <button>Post</button>
+            <p className='shareText'>Share something to the community...</p>
+            <hr className='line' />
+            <button className='shareButton'>Post</button>
           </div>
-          <div className='card'></div>
+          <div className='card'>
+            Despite our total project numbers only increasing by 2% compared to
+            last month, the 58 projects we are working on contain a significant
+            increase in deliverables.
+          </div>
         </main>
       </div>
     </div>

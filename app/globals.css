@@ -69,9 +69,11 @@ body {
   display: grid;
   grid-template-rows: 1fr 2px 3.5rem;
 }
-.shareText {
+.post {
+  border: none;
   line-height: 1.8rem;
   padding: 1rem;
+  width: 100%;
 }
 .postButton {
   background-color: rgba(253, 117, 0, 1);
@@ -173,11 +175,11 @@ body {
 }
 .photo {
   border-radius: 50%;
-  background-color: grey;
-  width: 4.8rem;
-  height: 4.8rem;
+  width: 4.5rem;
+  height: 4.5rem;
   margin: 1rem;
   margin-left: 2rem;
+  overflow: hidden;
 }
 .likes {
   align-items: center;

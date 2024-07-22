@@ -16,6 +16,7 @@ function Card({ name, position, text, activity, likes, picture }) {
         <p className='activity'>{activity}</p>
       </div>
       <p className='cardText'>
+        <p className='activityMobile'>{activity}</p>
         Despite our total project numbers only increasing by 2% compared to last
         month, the 58 projects we are working on contain a significant increase
         in deliverables.

@@ -130,7 +130,9 @@ export default function Home() {
           alt='HackSoft Logo'
           className='logo'
         /> */}
-        <div className='avatar'></div>
+        <div className='avatar'>
+          <img src={posts && posts[0]?.picture?.medium} alt='profilePhoto' />
+        </div>
       </nav>
       <div className='feed'>
         <aside className='sidebar'>
@@ -152,7 +154,12 @@ export default function Home() {
             </svg>
           </span>
           <div className='user'>
-            <span className='photo'></span>
+            <span className='photo' style={{ marginLeft: '2rem' }}>
+              <img
+                src={posts && posts[0]?.picture?.medium}
+                alt='profilePhoto'
+              />
+            </span>
             <div>
               <h1 className='name'>Ivaylo Bachvarov</h1>
               <h2 className='position'>CoFounder, HackSoft</h2>

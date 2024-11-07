@@ -10,7 +10,7 @@ const Tile = styled.div`
   padding: 1rem;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 12rem auto 1fr;
+  grid-template-rows: 16rem auto 1fr;
   overflow: hidden;
 
   :&hover  {

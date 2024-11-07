@@ -7,7 +7,7 @@ import useDebounce from '../hooks/useDebounce';
 function SearchBar({ updateState, suggestions, setSuggestions, setIgnore }) {
   const [value, setValue] = useState('');
   const apiKey = '';
-  const debouncedInputValue = useDebounce(value, 800);
+  const debouncedInputValue = useDebounce(value, 500);
 
   const fetchSuggestions = async (value) => {
     if (typeof value === 'string') {
@@ -16,7 +16,13 @@ function SearchBar({ updateState, suggestions, setSuggestions, setIgnore }) {
         return;
       }
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/keyword?api_key=${apiKey}&query=${value}`
+        `https://api.themoviedb.org/3/search/keyword`,
+        {
+          params: {
+            api_key: apiKey,
+            query: value,
+          },
+        }
       );
       const { results } = response.data;
       if (Object.keys(results).length !== 0) {

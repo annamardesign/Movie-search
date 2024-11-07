@@ -27,9 +27,11 @@ export default function App() {
 
   const loadMore = () => {
     setPage((page) => page + 1);
+    setIgnore(false);
   };
   const loadLess = () => {
     setPage((page) => page - 1);
+    setIgnore(false);
   };
   const handleSubmit = () => {
     setSuggestions([]);

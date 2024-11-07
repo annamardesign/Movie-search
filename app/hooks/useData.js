@@ -7,12 +7,17 @@ export default function useData(query, page, ignore, setIgnore) {
   const [data, setData] = useState(null);
   const [total, setTotal] = useState('');
   const [totalPages, setTotalPages] = useState(1);
+
   useEffect(() => {
     const fetch = async (e) => {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${apiKey}`,
+        `https://api.themoviedb.org/3/search/movie`,
         {
-          params: { query, page },
+          params: {
+            api_key: apiKey,
+            query,
+            page,
+          },
         }
       );
       const { results, total_results, total_pages } = response.data;

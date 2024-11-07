@@ -9,11 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/env": "^15.0.2",
+    "@next/env": "^15.p0.2",
     "axios": "^1.7.2",
     "next": "14.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "eslint": "^8",

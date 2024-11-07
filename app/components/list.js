@@ -1,8 +1,9 @@
 import Card from './card';
+import GridList from './ui/GridList';
 
 function List({ movies }) {
   return (
-    <ul className='movieList'>
+    <GridList>
       {movies &&
         movies?.map((movie, index) => (
           <li key={index + movie?.original_title}>
@@ -13,7 +14,7 @@ function List({ movies }) {
             />
           </li>
         ))}
-    </ul>
+    </GridList>
   );
 }
 export default List;

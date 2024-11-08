@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and next.js.
 
-### `npm install`
+### `npm install` and `npm install --legacy-peer-deps`
 
 ## Available Scripts
 

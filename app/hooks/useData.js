@@ -7,33 +7,40 @@ export default function useData(query, page, ignore, setIgnore) {
   const [data, setData] = useState(null);
   const [total, setTotal] = useState('');
   const [totalPages, setTotalPages] = useState(1);
+  const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
-    const fetch = async (e) => {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/search/movie`,
-        {
-          params: {
-            api_key: apiKey,
-            query,
-            page,
-          },
+    try {
+      const fetch = async (e) => {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/search/movie`,
+          {
+            params: {
+              api_key: apiKey,
+              query,
+              page,
+            },
+          }
+        );
+        const { results, total_results, total_pages } = response.data;
+        if (!ignore) {
+          setData(results);
+          setTotal(total_results);
+          setTotalPages(total_pages);
         }
-      );
-      const { results, total_results, total_pages } = response.data;
+      };
       if (!ignore) {
-        setData(results);
-        setTotal(total_results);
-        setTotalPages(total_pages);
+        fetch();
       }
-    };
-    if (!ignore) {
-      fetch();
+    } catch (error) {
+      if (error) {
+        setErrorMsg('Error while loading data. Try again later.');
+      }
     }
 
     return () => {
       setIgnore(true);
     };
   }, [query, page, ignore, setIgnore]);
-  return [data, total, totalPages];
+  return [data, total, totalPages, errorMsg];
 }

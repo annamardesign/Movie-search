@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, Suspense } from 'react';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import useData from './hooks/useData';
 import List from './components/list';
 import Loader from './components/loader';
@@ -12,10 +13,12 @@ import Button from './components/ui/Button';
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const [errorMsg, setErrorMsg] = useState('');
   const [page, setPage] = useState(1);
   const [ignore, setIgnore] = useState(true);
-  const [results, total, total_pages] = useData(
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  const [results, total, total_pages, errorMsg] = useData(
     searchQuery,
     page,
     ignore,
@@ -33,24 +36,33 @@ export default function App() {
     setPage((page) => page - 1);
     setIgnore(false);
   };
+  const setPaths = (search) => {
+    const params = new URLSearchParams(searchParams);
+    if (search) {
+      params.set('search', search);
+    } else {
+      params.delete('search');
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
   const handleSubmit = () => {
     setSuggestions([]);
+    setPaths(searchQuery);
     setIgnore(false);
   };
   return (
     <>
       <Navigation>
-        <Suspense>
-          <SearchBar
-            suggestions={suggestions}
-            setSuggestions={setSuggestions}
-            updateState={handleUpdateState}
-            setIgnore={setIgnore}
-          />
-          <Button type='submit' className='searchButton' onClick={handleSubmit}>
-            Search
-          </Button>
-        </Suspense>
+        <SearchBar
+          suggestions={suggestions}
+          setSuggestions={setSuggestions}
+          updateState={handleUpdateState}
+          setIgnore={setIgnore}
+          setPaths={setPaths}
+        />
+        <Button type='submit' className='searchButton' onClick={handleSubmit}>
+          Search
+        </Button>
       </Navigation>
       <Main>
         {results?.length ? (

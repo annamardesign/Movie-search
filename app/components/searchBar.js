@@ -1,6 +1,5 @@
 'use client';
 import { React, useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import Input from './ui/Input';
 import useDebounce from '../hooks/useDebounce';
@@ -13,9 +12,9 @@ function SearchBar({
   setPaths,
 }) {
   const [value, setValue] = useState('');
+  // const apiKey = process.env.NEXT_PUBLIC_MOVIES_API_KEY;
   const apiKey = '';
   const debouncedInputValue = useDebounce(value, 500);
-  const searchParams = useSearchParams();
 
   const fetchSuggestions = async (value) => {
     if (typeof value === 'string') {
@@ -58,6 +57,16 @@ function SearchBar({
     updateState(newState);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      const value = e.target.value;
+      setValue(value);
+      updateState(value);
+      setIgnore(false);
+      setPaths(value);
+    }
+  };
+
   return (
     <div className='searchContainer'>
       <Input
@@ -66,8 +75,8 @@ function SearchBar({
         value={value}
         placeholder='Enter a movie title'
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         className='searchInput'
-        defaultValue={searchParams.get('search')?.toString()}
       />
       {suggestions && suggestions.length !== 0 && (
         <div className='searchSuggestions'>

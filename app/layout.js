@@ -1,12 +1,15 @@
 'use client';
 import './globals.css';
+import StyledComponentsRegistry from './lib/registry';
 
 export default function RootLayout({ children }) {
   return (
     <>
       <html lang='en'>
         <body>
-          <div>{children}</div>
+          <StyledComponentsRegistry>
+            <div>{children}</div>
+          </StyledComponentsRegistry>
         </body>
       </html>
     </>
